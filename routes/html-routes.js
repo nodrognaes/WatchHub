@@ -4,8 +4,8 @@ const path = require("path");
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 
-module.exports = function(app) {
-  app.get("/", (req, res) => {
+module.exports = function(axios) {
+  axios.get("/", (req, res) => {
     console.log("GET /");
     // If the user already has an account send them to the members page
     if (req.user) {
@@ -14,7 +14,7 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/signup.html"));
   });
 
-  app.get("/login", (req, res) => {
+  axios.get("/login", (req, res) => {
     console.log("GET /login");
     // If the user already has an account send them to the members page
     if (req.user) {
@@ -25,7 +25,7 @@ module.exports = function(app) {
 
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
-  app.get("/members", isAuthenticated, (req, res) => {
+  axios.get("/members", isAuthenticated, (req, res) => {
     console.log("GET /members");
     // console.trace();
     res.sendFile(path.join(__dirname, "../public/members.html"));

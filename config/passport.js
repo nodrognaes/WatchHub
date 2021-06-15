@@ -19,8 +19,8 @@ passport.use(
         }
       }).then(dbUser => {
         // If there's no user with the given email
-        console.log("passport - dbUser:", dbUser.get({plain: true}));
         if (!dbUser) {
+          console.log("User does not exist!");
           return done(null, false, {
             message: "Incorrect email."
           });
@@ -32,7 +32,7 @@ passport.use(
           });
         }
         // If none of the above, return the user
-        console.log("passport authenticate - passed");
+        console.log("passport authentication - passed");
         return done(null, dbUser);
       });
     }
