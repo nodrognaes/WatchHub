@@ -4,7 +4,7 @@ const passport = require("../../config/passport");
 
 // Login
 router.post("/login", passport.authenticate("local"), async (req, res) => {
-  console.log("POST /api/user/login");
+  console.log("POST /api/auth/login");
 
   try {
     res
@@ -28,7 +28,7 @@ router.post("/signup", async (req, res) => {
 
     res.redirect(307, "/api/user/login");
     // Or redirect to login web page
-    // res.redirect("/login");
+    res.redirect("/login");
   } catch (err) {
     console.log(err.errors[0]);
     res.status(500).json({ messge: err.errors[0]["message"]});
