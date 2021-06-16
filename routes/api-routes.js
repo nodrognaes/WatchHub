@@ -1,12 +1,13 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
+const axios = require('axios')
 
-module.exports = function(app) {
+module.exports = function(axios) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
-  app.post("/api/login", passport.authenticate("local"), async (req, res) => {
+  axios.post("/api/login", passport.authenticate("local"), async (req, res) => {
     console.log("POST /api/login");
     // Testing Post and Favorite using req.user from login
     console.log("req.user.id", req.user.id);
@@ -65,7 +66,7 @@ module.exports = function(app) {
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
-  app.post("/api/signup", (req, res) => {
+  axios.post("/api/signup", (req, res) => {
     console.log("POST /api/signup");
 
     db.User.create({
@@ -81,14 +82,14 @@ module.exports = function(app) {
   });
 
   // Route for logging user out
-  app.get("/logout", (req, res) => {
+  axios.get("/logout", (req, res) => {
     console.log("GET /logout")
     req.logout();
     res.redirect("/");
   });
 
   // Route for getting some data about our user to be used client side
-  app.get("/api/user_data", (req, res) => {
+  axios.get("/api/user_data", (req, res) => {
     console.log("GET /api/user_data");
     if (!req.user) {
       // The user is not logged in, send back an empty object

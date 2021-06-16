@@ -24,7 +24,7 @@ $(document).ready(() => {
 
   // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
   function loginUser(email, password) {
-    $.post("/api/login", {
+    $.post("/api/user/login", {
       email: email,
       password: password
     })
@@ -33,8 +33,14 @@ $(document).ready(() => {
         window.location.replace("/members");
         // If there's an error, log the error
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(handleLoginErr);
+  }
+
+  function handleLoginErr(err) {
+    console.log(err);
+    $("#alert .msg").text(err.status + " - " + err.responseText);
+    $("#alert").fadeIn(2000, function() {
+      location.reload();
+    });
   }
 });
