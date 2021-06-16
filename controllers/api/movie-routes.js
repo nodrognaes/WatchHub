@@ -7,21 +7,28 @@ const axios = require('axios');
 // API routes for other resources - post, favorite
 router.get('/', (req , res) => {
   console.log("GET /api/movies")
+  
   let apiKey = "&apikey=" + process.env.API_KEY_OMDB;
   let userSearchItem = req.body.user;
+
   console.log(userSearchItem);
+  
   let url = `https://www.omdbapi.com/?s=${userSearchItem}${apiKey}`;
   let urlPlot =
     `https://omdbapi.com/?t=${userSearchItem}&plot=full${apiKey}`;
   let urlActors = `https://omdbapi.com/?t=${userSearchItem}${apiKey}`;
+
   console.log(url);
+  
   axios.get(url, function (apiData) {
     console.log(apiData);
+
     let title = apiData.Search[0].Title;
     let posterimg = apiData.Search[0].Poster;
     let relatedSearch = apiData.Search[1].Poster;
     let relatedSearch2 = apiData.Search[2].Poster;
     let relatedSearch3 = apiData.Search[3].Poster;
+    
     let mainImdb =
       `https://www.imdb.com/title/${apiData.Search[0].imdbID}/`;
     let imdburl1 =
