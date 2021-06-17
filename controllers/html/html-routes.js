@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
   if (req.user) {
     res.redirect("/members");
   }
-  res.sendFile(path.join(__dirname, "../../public/signup.html"));
+  res.sendFile(path.join(__dirname, "../../public/login.html"));
 });
 
 router.get("/login", (req, res) => {
@@ -19,6 +19,18 @@ router.get("/login", (req, res) => {
     res.redirect("/members");
   }
   res.sendFile(path.join(__dirname, "../../public/login.html"));
+});
+
+router.get("/logout", (req, res) => {
+  console.log("GET /logout");
+  // If the user already has an account send them to the members page
+  res.sendFile(path.join(__dirname, "../../public/login.html"));
+});
+
+router.get("/signup", (req, res) => {
+  console.log("GET /login");
+  // If the user already has an account send them to the members page
+  res.sendFile(path.join(__dirname, "../../public/signup.html"));
 });
 
 // Here we've add our isAuthenticated middleware to this route.

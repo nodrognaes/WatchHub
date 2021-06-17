@@ -8,9 +8,13 @@ router.post("/", (req, res) => {
   console.log("POST /api/movies");
 
   let apiKey = "&apikey=" + process.env.API_KEY_OMDB;
+  let apiKey2 = "?apiKey=" + process.env.API_KEY_WATCH;
+  console.log(apiKey)
+
   let userSearchItem = req.body.user;
   console.log("req.body", req.body);
-  console.log(userSearchItem);
+
+  console.log('userSearchItem', userSearchItem);
 
   let url = `https://www.omdbapi.com/?s=${userSearchItem}${apiKey}`;
   let urlPlot = `https://omdbapi.com/?t=${userSearchItem}&plot=full${apiKey}`;
@@ -19,7 +23,7 @@ router.post("/", (req, res) => {
   console.log(url);
 
   axios.get(url).then(async function (apiData) {
-    console.log(apiData);
+    // console.log(apiData);
 
     let title = apiData.data.Search[0].Title;
     let posterimg = apiData.data.Search[0].Poster;
@@ -35,7 +39,7 @@ router.post("/", (req, res) => {
     console.log("urlPlot", urlPlot);
     let watch = await getOmdb(urlPlot);
 
-    let urlMode = `https://api.watchmode.com/v1/search/${apiKey}&search_field=name&search_value=${userSearchItem}`;
+    let urlMode = `https://api.watchmode.com/v1/search/${apiKey2}&search_field=name&search_value=${userSearchItem}`;
     console.log("urlMode:", urlMode);
     const watch2 = await getWatchMode(urlMode, userSearchItem);
     console.log("watch", watch);
@@ -60,7 +64,7 @@ router.post("/", (req, res) => {
     console.log("getOmdb");
     const apiData = await axios.get(url);
 
-    console.log("apiData", apiData);
+    // console.log("apiData", apiData);
     let plot = apiData.data.Plot;
     let actors = apiData.data.Actors;
 
@@ -75,18 +79,19 @@ router.post("/", (req, res) => {
     try {
       const userData = await axios.get(url);
 
-      console.log("userData", userData);
-      let wmId = userData.title_results[0].id;
+      // console.log("userData", userData);
+      let wmId = userData.data.title_results[0].id;
       console.log("wmId", wmId);
 
       let apiKey2 = "?apiKey=" + process.env.API_KEY_WATCH;
       let idUrl = `https://api.watchmode.com/v1/title/${wmId}/details/${apiKey2}`;
       console.log("idUrl:", idUrl);
       const userData2 = await axios.get(idUrl);
-      let runTime = userData2.runtime_minutes;
-      let releaseDate = userData2.release_date;
-      let criticScore = userData2.critic_score;
-      let usRating = userData2.us_rating;
+      console.log('userData2', userData2)
+      let runTime = userData2.data.runtime_minutes;
+      let releaseDate = userData2.data.release_date;
+      let criticScore = userData2.data.critic_score;
+      let usRating = userData2.data.us_rating;
       return { runTime, releaseDate, criticScore, usRating, wmId };
     } catch (err) {
       console.log(err);

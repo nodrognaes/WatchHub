@@ -85,7 +85,7 @@ module.exports = function(axios) {
   axios.get("/logout", (req, res) => {
     console.log("GET /logout")
     req.logout();
-    res.redirect("/");
+    res.redirect("/login");
   });
 
   // Route for getting some data about our user to be used client side
