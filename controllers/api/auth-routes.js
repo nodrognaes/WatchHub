@@ -18,7 +18,7 @@ router.post("/login", passport.authenticate("local"), async (req, res) => {
 
 // CREATE new user thru signup
 router.post("/signup", async (req, res) => {
-  console.log("POST /api/user/signup");
+  console.log("POST /api/auth/signup");
   try {
     const dbUserData = await User.create({
       name: req.body.name,
@@ -26,7 +26,7 @@ router.post("/signup", async (req, res) => {
       password: req.body.password,
     });
 
-    res.redirect(307, "/api/user/login");
+    // res.redirect(307, "/api/user/login");
     // Or redirect to login web page
     res.redirect("/login");
   } catch (err) {
@@ -36,7 +36,7 @@ router.post("/signup", async (req, res) => {
 });
 
 router.get("/user_data", (req, res) => {
-  console.log("GET /api/user/user_data");
+  console.log("GET /api/auth/user_data");
   if (!req.user) {
     // The user is not logged in, send back an empty object
     res.json({});
@@ -52,7 +52,7 @@ router.get("/user_data", (req, res) => {
 });
 // Logout
 router.get("/logout", (req, res) => {
-  console.log("GET - /api/user/logout");
+  console.log("GET - /api/auth/logout");
   if (req.user) {
     req.logout();
     res.redirect("/login");
