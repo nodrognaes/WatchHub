@@ -2,7 +2,7 @@ let containerDiv = document.getElementById("container");
 let searchBtn = document.getElementById("searchBtn");
 let data;
 let userInput = document.querySelector("#userQuery");
-const callApi = require('../../controllers/api/movie-routes');
+// const callApi = require('../../controllers/api/movie-routes');
 
 $(document).ready(function () {
   $("#streaming").hide();
@@ -17,12 +17,30 @@ $(document).ready(function () {
   });
 
   document.querySelector("#searchBtn").addEventListener("click", () => {
-    $.get("/api/movies", {user: userInput.val().trim() }).then((data) => {
+     let userChoice = userInput.value.trim();
+     console.log('userChoice', userChoice)
+    // $.ajax({ 
+    //   url: "/api/movies", 
+    //   data: {user: userChoice },
+    //   method: 'GET'
+    // })
+    const data = {
+      user: userChoice
+    }
+
+    fetch('/api/movies',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'},
+        body: JSON.stringify(data) 
+    } )
+    .then((status) => status.json() )
+    .then((data) => {
       // $(".member-name").text(data.email);
       console.log(data);
     });
 
-    $.get('/api/watch')
+
   });
 
   userInput.addEventListener("keyup", function (event) {
