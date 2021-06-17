@@ -28,7 +28,7 @@ router.post("/signup", async (req, res) => {
 
     res.redirect(307, "/api/user/login");
     // Or redirect to login web page
-    res.redirect("/login");
+    // res.redirect("/login");
   } catch (err) {
     console.log(err.errors[0]);
     res.status(500).json({ messge: err.errors[0]["message"]});
