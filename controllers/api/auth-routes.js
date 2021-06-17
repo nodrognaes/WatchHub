@@ -55,7 +55,7 @@ router.get("/logout", (req, res) => {
   console.log("GET - /api/user/logout");
   if (req.user) {
     req.logout();
-    res.redirect("/");
+    res.redirect("/login");
   } else {
     res.status(404).end();
   }
