@@ -13,7 +13,7 @@ router.post("/", (req, res) => {
   console.log(apiKey)
 
   let userSearchItem = req.body.user;
-  console.log("req.body", req.body);
+  // console.log("req.body", req.body);
 
   console.log('userSearchItem', userSearchItem);
 
@@ -44,10 +44,10 @@ router.post("/", (req, res) => {
     let urlMode = `https://api.watchmode.com/v1/search/${apiKey2}&search_field=name&search_value=${userSearchItem}`;
     console.log("urlMode:", urlMode); 
     const watch2 = await getWatchMode(urlMode, userSearchItem);
-    const watch3 = await getMovieDB(idUrl, userSearchItem);
+    // const watch3 = await getMovieDB(idUrl, userSearchItem);
     console.log("watch", watch);
     console.log("watch2", watch2);
-    console.log("watch3", watch3)
+    // console.log("watch3", watch3)
 
     res.json({
       title,
@@ -60,8 +60,7 @@ router.post("/", (req, res) => {
       imdburl2,
       imdburl3,
       watch,
-      watch2,
-      watch3
+      watch2
     });
   });
 
@@ -92,7 +91,7 @@ router.post("/", (req, res) => {
       let idUrl = `https://api.watchmode.com/v1/title/${wmId}/details/${apiKey2}`;
       console.log("idUrl:", idUrl);
       const userData2 = await axios.get(idUrl);
-      console.log('userData2', userData2)
+      // console.log('userData2', userData2)
       let runTime = userData2.data.runtime_minutes;
       let releaseDate = userData2.data.release_date;
       let criticScore = userData2.data.critic_score;
@@ -102,28 +101,28 @@ router.post("/", (req, res) => {
       console.log(err);
     };
   }
-  async function getMovieDB(url, search) {
-    console.log("getMovieDB");
+  // async function getMovieDB(url, search) {
+  //   console.log("getMovieDB");
 
-    try {
-      const movieData = await axios.get(url);
-      console.log("movieData", movieData);
+  //   try {
+  //     const movieData = await axios.get(url);
+  //     console.log("movieData", movieData);
 
-      let movieID = movieData.data.imdb_id;
-      console.log("movieID", movieID);
-      let apiKey3 = process.env.API_KEY_MOVIE;
-      let idUrl = `https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=${apiKey3}&language=en-US`;
-      console.log("idUrl:", idUrl);
-      const userData2 = await axios.get(idUrl);
-      console.log('userData2', userData2)
-      const movieData2 = await axios.get(idUrl)
-      console.log("idUrl", idUrl)
-      let key = movieData2.data.results.key
-      return { key };
-    } catch (err) {
-      console.log(err);
-    };
-  }
+  //     let movieID = movieData.data.imdb_id;
+  //     console.log("movieID", movieID);
+  //     let apiKey3 = process.env.API_KEY_MOVIE;
+  //     let idUrl = `https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=${apiKey3}&language=en-US`;
+  //     console.log("idUrl:", idUrl);
+  //     const userData2 = await axios.get(idUrl);
+  //     console.log('userData2', userData2)
+  //     const movieData2 = await axios.get(idUrl)
+  //     console.log("idUrl", idUrl)
+  //     let key = movieData2.data.results.key
+  //     return { key };
+  //   } catch (err) {
+  //     console.log(err);
+  //   };
+  // }
 });
 
 module.exports = router;
