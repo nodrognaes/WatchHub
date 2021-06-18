@@ -13,7 +13,7 @@ router.post("/", (req, res) => {
   console.log(apiKey)
 
   let userSearchItem = req.body.user;
-  console.log("req.body", req.body);
+  // console.log("req.body", req.body);
 
   console.log('userSearchItem', userSearchItem);
 
@@ -92,7 +92,7 @@ router.post("/", (req, res) => {
       let idUrl = `https://api.watchmode.com/v1/title/${wmId}/details/${apiKey2}`;
       console.log("idUrl:", idUrl);
       const userData2 = await axios.get(idUrl);
-      console.log('userData2', userData2)
+      // console.log('userData2', userData2)
       let runTime = userData2.data.runtime_minutes;
       let releaseDate = userData2.data.release_date;
       let criticScore = userData2.data.critic_score;
