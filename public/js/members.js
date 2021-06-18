@@ -55,7 +55,6 @@ $(document).ready(function () {
         let releaseDate = data.watch2.releaseDate;
         let criticScore = data.watch2.criticScore;
         let usRating = data.watch2.usRating;
-        // $(".member-name").text(data.email);
         
         document.getElementById("movietitle").innerHTML = `<h1>${title}</h1>`;
         console.log(data);
@@ -78,6 +77,7 @@ $(document).ready(function () {
         document.getElementById("critic-score").innerHTML = `${criticScore}/100`;
         document.getElementById("rating").innerHTML = `${usRating}`;
       });
+      
   });
 
   userInput.addEventListener("keyup", function (event) {
@@ -85,9 +85,7 @@ $(document).ready(function () {
       document.getElementById("searchBtn").click();
     }
   });
-
-  // function appendPage() {
-  //   document.getElementById("movietitle").innerHTML = "<h1>" + title + "</h1>";
-    
-  // }
+  $.get("/api/auth/user_data").then(data => {
+    $(".member-name").text(data.name);
+  })
 });
