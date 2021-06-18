@@ -92,7 +92,7 @@ router.post("/", (req, res) => {
       let idUrl = `https://api.watchmode.com/v1/title/${wmId}/details/${apiKey2}`;
       console.log("idUrl:", idUrl);
       const userData2 = await axios.get(idUrl);
-      console.log('userData2', userData2)
+      // console.log('userData2', userData2)
       let runTime = userData2.data.runtime_minutes;
       let releaseDate = userData2.data.release_date;
       let criticScore = userData2.data.critic_score;
@@ -104,18 +104,15 @@ router.post("/", (req, res) => {
   }
   async function getMovieDB(url, search) {
     console.log("getMovieDB");
-
+    let idUrl = `https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=${apiKey3}&language=en-US`;
+    let apiKey3 = process.env.API_KEY_MOVIE;
     try {
       const movieData = await axios.get(url);
       console.log("movieData", movieData);
 
       let movieID = movieData.data.imdb_id;
       console.log("movieID", movieID);
-      let apiKey3 = process.env.API_KEY_MOVIE;
-      let idUrl = `https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=${apiKey3}&language=en-US`;
       console.log("idUrl:", idUrl);
-      const userData2 = await axios.get(idUrl);
-      console.log('userData2', userData2)
       const movieData2 = await axios.get(idUrl)
       console.log("idUrl", idUrl)
       let key = movieData2.data.results.key
