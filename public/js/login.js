@@ -38,7 +38,7 @@ $(document).ready(() => {
 
   function handleLoginErr(err) {
     console.log(err);
-    $("#alert .msg").text(err.status + " - " + err.responseText);
+    $("#alert .msg").text(err.status + " - Login information is incorrect");
     $("#alert").fadeIn(2000, function() {
       location.reload();
     });
