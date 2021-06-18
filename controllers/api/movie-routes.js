@@ -9,6 +9,7 @@ router.post("/", (req, res) => {
 
   let apiKey = "&apikey=" + process.env.API_KEY_OMDB;
   let apiKey2 = "?apiKey=" + process.env.API_KEY_WATCH;
+
   console.log(apiKey)
 
   let userSearchItem = req.body.user;
@@ -19,6 +20,7 @@ router.post("/", (req, res) => {
   let url = `https://www.omdbapi.com/?s=${userSearchItem}${apiKey}`;
   let urlPlot = `https://omdbapi.com/?t=${userSearchItem}&plot=full${apiKey}`;
   let urlActors = `https://omdbapi.com/?t=${userSearchItem}${apiKey}`;
+  
 
   console.log(url);
 
@@ -40,10 +42,12 @@ router.post("/", (req, res) => {
     let watch = await getOmdb(urlPlot);
 
     let urlMode = `https://api.watchmode.com/v1/search/${apiKey2}&search_field=name&search_value=${userSearchItem}`;
-    console.log("urlMode:", urlMode);
+    console.log("urlMode:", urlMode); 
     const watch2 = await getWatchMode(urlMode, userSearchItem);
+    const watch3 = await getMovieDB(idUrl, userSearchItem);
     console.log("watch", watch);
     console.log("watch2", watch2);
+    console.log("watch3", watch3)
 
     res.json({
       title,
@@ -57,6 +61,7 @@ router.post("/", (req, res) => {
       imdburl3,
       watch,
       watch2,
+      watch3
     });
   });
 
@@ -95,7 +100,29 @@ router.post("/", (req, res) => {
       return { runTime, releaseDate, criticScore, usRating, wmId };
     } catch (err) {
       console.log(err);
-    }
+    };
+  }
+  async function getMovieDB(url, search) {
+    console.log("getMovieDB");
+
+    try {
+      const movieData = await axios.get(url);
+      console.log("movieData", movieData);
+
+      let movieID = movieData.data.imdb_id;
+      console.log("movieID", movieID);
+      let apiKey3 = process.env.API_KEY_MOVIE;
+      let idUrl = `https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=${apiKey3}&language=en-US`;
+      console.log("idUrl:", idUrl);
+      const userData2 = await axios.get(idUrl);
+      console.log('userData2', userData2)
+      const movieData2 = await axios.get(idUrl)
+      console.log("idUrl", idUrl)
+      let key = movieData2.data.results.key
+      return { key };
+    } catch (err) {
+      console.log(err);
+    };
   }
 });
 
