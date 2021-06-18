@@ -8,21 +8,39 @@ form.login {
 /* html {
   background-color: rgb(90, 90, 88)
 } */  
-
+i {
+	font-size: 57.5px;
+	color: rgb(255, 255, 255)
+}
+#hero-body {
+	display: flex;
+	justify-content: space-between;
+}
+#watchhub {
+	color: rgb(232, 176, 247)
+}
 #headerRow {
-  background-color: #0967f5;
+  background-color: #0aa2a7;
   position: fixed;
   width: 100%;
   z-index: 10;
+  height: 0px;
 }
 #gitlink {
   float: right;
   text-decoration: solid;
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 h1 {
   color: white;
+}
+h2 {
+	color: rgb(255, 255, 255)
+}
+a {
+	text-decoration: rgba(232, 176, 247, 0.74);
+	color: rgba(232, 176, 247, 0.74)
 }
 .result {
 	
