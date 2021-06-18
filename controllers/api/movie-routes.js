@@ -44,10 +44,10 @@ router.post("/", (req, res) => {
     let urlMode = `https://api.watchmode.com/v1/search/${apiKey2}&search_field=name&search_value=${userSearchItem}`;
     console.log("urlMode:", urlMode); 
     const watch2 = await getWatchMode(urlMode, userSearchItem);
-    const watch3 = await getMovieDB(idUrl, userSearchItem);
+    // const watch3 = await getMovieDB(idUrl, userSearchItem);
     console.log("watch", watch);
     console.log("watch2", watch2);
-    console.log("watch3", watch3)
+    // console.log("watch3", watch3)
 
     res.json({
       title,
@@ -60,8 +60,8 @@ router.post("/", (req, res) => {
       imdburl2,
       imdburl3,
       watch,
-      watch2,
-      watch3
+      watch2
+      // watch3
     });
   });
 

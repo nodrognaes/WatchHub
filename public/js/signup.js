@@ -42,7 +42,7 @@ $(document).ready(() => {
 
   function handleLoginErr(err) {
     console.log("signup - handleLoginErr")
-    $("#alert .msg").text(err.message);
+    $("#alert .msg").text("Please enter a unique email and password");
     $("#alert").fadeIn(500, function() {
       location.reload();
     });
