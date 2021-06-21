@@ -21,6 +21,7 @@ form.login {
 h1 {
   color: white;
 }
+
 .result {
 	
 }
@@ -40,6 +41,13 @@ h1 {
   text-align: center;
 }
 
+#description{
+    height: 150px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+/* #description::-webkit-scrollbar { width: 0 !important} */
 
 footer {
   position: fixed;
