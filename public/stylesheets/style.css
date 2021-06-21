@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 form.signup,
 form.login {
   margin-top: 50px;
@@ -7,21 +8,40 @@ form.login {
 /* html {
   background-color: rgb(90, 90, 88)
 } */  
-
+i {
+	font-size: 57.5px;
+	color: rgb(255, 255, 255)
+}
+#hero-body {
+	display: flex;
+	justify-content: space-between;
+}
+#watchhub {
+	color: rgb(232, 176, 247)
+}
 #headerRow {
-  background-color: #3273dc;
+  background-color: #0aa2a7;
   position: fixed;
   width: 100%;
   z-index: 10;
+  height: 0px;
 }
 #gitlink {
   float: right;
+  text-decoration: solid;
+  color: rgb(255, 255, 255);
 }
 
 h1 {
   color: white;
 }
-
+h2 {
+	color: rgb(255, 255, 255)
+}
+a {
+	text-decoration: rgba(232, 176, 247, 0.74);
+	color: rgba(232, 176, 247, 0.74)
+}
 .result {
 	
 }
@@ -36,6 +56,7 @@ h1 {
 
 .title {
   text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
 .subtitle {
   text-align: center;
@@ -76,7 +97,7 @@ html { width: 100%; height:100%; overflow:scroll; }
 body { 
 	width: 100%;
 	height:100%;
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Poppins', sans-serif;
 	background: #092756;
 	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
 	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
