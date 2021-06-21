@@ -9,6 +9,7 @@ router.post("/", (req, res) => {
 
   let apiKey = "&apikey=" + process.env.API_KEY_OMDB;
   let apiKey2 = "?apiKey=" + process.env.API_KEY_WATCH;
+  let apiKey3 = process.env.API_KEY_MOVIE;
 
   console.log(apiKey)
 
@@ -19,8 +20,8 @@ router.post("/", (req, res) => {
 
   let url = `https://www.omdbapi.com/?s=${userSearchItem}${apiKey}`;
   let urlPlot = `https://omdbapi.com/?t=${userSearchItem}&plot=full${apiKey}`;
-  let urlActors = `https://omdbapi.com/?t=${userSearchItem}${apiKey}`;
-  
+
+
 
   console.log(url);
 
@@ -37,17 +38,21 @@ router.post("/", (req, res) => {
     let imdburl1 = `https://www.imdb.com/title/${apiData.data.Search[1].imdbID}/`;
     let imdburl2 = `https://www.imdb.com/title/${apiData.data.Search[2].imdbID}/`;
     let imdburl3 = `https://www.imdb.com/title/${apiData.data.Search[3].imdbID}/`;
+    let omdbData = apiData.data.Search[0].imdbID;
 
-    console.log("urlPlot", urlPlot);
+    // console.log("urlPlot", urlPlot);
     let watch = await getOmdb(urlPlot);
 
     let urlMode = `https://api.watchmode.com/v1/search/${apiKey2}&search_field=name&search_value=${userSearchItem}`;
-    console.log("urlMode:", urlMode); 
+    // console.log("urlMode:", urlMode); 
     const watch2 = await getWatchMode(urlMode, userSearchItem);
-    // const watch3 = await getMovieDB(idUrl, userSearchItem);
+
+    let idUrl = `https://api.themoviedb.org/3/movie/${omdbData}/videos?api_key=${apiKey3}&language=en-US`;
+    // console.log("idUrl", idUrl)
+    const watch3 = await getMovieDB(idUrl);
     console.log("watch", watch);
     console.log("watch2", watch2);
-    // console.log("watch3", watch3)
+    console.log("watch3", watch3)
 
     res.json({
       title,
@@ -60,13 +65,13 @@ router.post("/", (req, res) => {
       imdburl2,
       imdburl3,
       watch,
-      watch2
-      // watch3
+      watch2,
+      watch3
     });
   });
 
   async function getOmdb(url) {
-    console.log("getOmdb");
+    // console.log("getOmdb");
     const apiData = await axios.get(url);
 
     // console.log("apiData", apiData);
@@ -79,18 +84,18 @@ router.post("/", (req, res) => {
   }
 
   async function getWatchMode(url, search) {
-    console.log("getWatchMode");
+    // console.log("getWatchMode");
 
     try {
       const userData = await axios.get(url);
 
       // console.log("userData", userData);
       let wmId = userData.data.title_results[0].id;
-      console.log("wmId", wmId);
+      // console.log("wmId", wmId);
 
       let apiKey2 = "?apiKey=" + process.env.API_KEY_WATCH;
       let idUrl = `https://api.watchmode.com/v1/title/${wmId}/details/${apiKey2}`;
-      console.log("idUrl:", idUrl);
+      // console.log("idUrl:", idUrl);
       const userData2 = await axios.get(idUrl);
       // console.log('userData2', userData2)
       let runTime = userData2.data.runtime_minutes;
@@ -102,28 +107,20 @@ router.post("/", (req, res) => {
       console.log(err);
     };
   }
-  // async function getMovieDB(url, search) {
-  //   console.log("getMovieDB");
+  async function getMovieDB(url) {
+    // console.log("getMovieDB");
+    try {
+      const movieData = await axios.get(url);
+      console.log("url", url)
+      // console.log("movieData", movieData);
+      let movieID = movieData.data.results[0].key
 
-  //   try {
-  //     const movieData = await axios.get(url);
-  //     console.log("movieData", movieData);
-
-  //     let movieID = movieData.data.imdb_id;
-  //     console.log("movieID", movieID);
-  //     let apiKey3 = process.env.API_KEY_MOVIE;
-  //     let idUrl = `https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=${apiKey3}&language=en-US`;
-  //     console.log("idUrl:", idUrl);
-  //     const userData2 = await axios.get(idUrl);
-  //     console.log('userData2', userData2)
-  //     const movieData2 = await axios.get(idUrl)
-  //     console.log("idUrl", idUrl)
-  //     let key = movieData2.data.results.key
-  //     return { key };
-  //   } catch (err) {
-  //     console.log(err);
-  //   };
-  // }
+      console.log("movieID", movieID)
+      return { movieID };
+    } catch (err) {
+      console.log(err);
+    };
+  }
 });
 
 module.exports = router;
