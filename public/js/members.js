@@ -56,6 +56,9 @@ $(document).ready(function () {
         let criticScore = data.watch2.criticScore;
         let usRating = data.watch2.usRating;
         
+        let movieTrailer = data.watch3.movieID;
+        console.log('movieTrailer', movieTrailer)
+
         document.getElementById("movietitle").innerHTML = `<h1>${title}</h1>`;
         console.log(data);
         document.getElementById("result").innerHTML =
@@ -71,6 +74,7 @@ $(document).ready(function () {
         document.getElementById("description").innerHTML = `<p> ${plot}</p>`;
         document.getElementById("actors").innerHTML =
         `<h1>Starring: ${actors}</h1>`;
+        document.getElementById("trailerBox").innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${movieTrailer}" title="YouTube video player" frameborder="0" allowfullscreen></iframe>`;
 
         document.getElementById("run-time").innerHTML = `${runTime} min`;
         document.getElementById("release-date").innerHTML = `${releaseDate}`;
