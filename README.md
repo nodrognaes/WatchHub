@@ -17,3 +17,17 @@ Then, the user can access the application by entering localhost:8080 into their 
 
 ## Demo: ##
 
+
+User Signup and automatic Login:
+
+![signup](https://user-images.githubusercontent.com/48900910/122814410-23144d00-d2a2-11eb-885c-7cbc82cef811.gif)
+
+User Logout/Login:
+
+![logout](https://user-images.githubusercontent.com/48900910/122814445-2f000f00-d2a2-11eb-95c3-37b2d4a58b74.gif)
+
+Movie Search:
+
+![moviesearch](https://user-images.githubusercontent.com/48900910/122814465-37584a00-d2a2-11eb-9264-b6ee4682c53e.gif)
+
+
