@@ -10,12 +10,13 @@ The application utilizes Node.js and Express.js to create a RESTful API, it uses
 To initialize our application, in command line, the user may run
 
 ```
-node index.html
+node server.html
 ```
 
 Then, the user can access the application by entering localhost:8080 into their browswer searchbar. This will bring up the user login page. If the user does not have an existing registered username, they can create one by following the prompted link. Once the user is logged in, they can then enter the title of their favorite tv show or movie to access corresponding information via our backend API calls.
 
 ## Demo: ##
+
 
 User Signup and automatic Login:
 
@@ -28,3 +29,5 @@ User Logout/Login:
 Movie Search:
 
 ![moviesearch](https://user-images.githubusercontent.com/48900910/122814465-37584a00-d2a2-11eb-9264-b6ee4682c53e.gif)
+
+
